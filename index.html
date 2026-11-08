@@ -6,6 +6,10 @@
   <title>HARD PART — Barber Shop</title>
   <meta name="description" content="HARD PART is a modern barber shop for precision cuts, fades and hot-towel shaves. Demo project.">
   <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HARD PART — Barber Shop (demo)">
+  <meta property="og:description" content="A premium barber shop website showcase. Fictional business, demo booking.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Cpath d='M18 0h14v32H12z' fill='%23f1ebdd'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +39,9 @@
       <a href="#services">Services</a>
       <a href="#barbers">Barbers</a>
       <a href="#experience">Experience</a>
+      <a href="#gallery">Work</a>
       <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
       <a href="#visit">Visit</a>
       <a href="#book">Book Now</a>
     </nav>
@@ -96,15 +102,402 @@
       </div>
     </section>
 
-    <section class="stub" id="services"><p>Services and pricing — next phase</p></section>
-    <section class="stub" id="barbers"><p>Barbers — next phase</p></section>
-    <section class="stub" id="gallery"><p>Work — next phase</p></section>
-    <section class="stub" id="reviews"><p>Reviews — next phase</p></section>
-    <section class="stub" id="faq"><p>FAQ — next phase</p></section>
-    <section class="stub" id="visit"><p>Hours and location — next phase</p></section>
-    <section class="stub" id="book"><p>Booking — next phase</p></section>
+    <!-- SERVICES: editorial ledger. Selecting a service is handled in script.js and saved to localStorage. -->
+    <section class="section theme-cream services" id="services" aria-labelledby="servicesTitle">
+      <div class="container--wide">
+        <div class="grid services__head">
+          <h2 class="h2 services__title col-9 reveal" id="servicesTitle">The art<br>of the cut.</h2>
+          <div class="col-3 services__note reveal" style="--d:.15s">
+            <p class="services__tag">Demo content</p>
+            <p class="caption">Six services. Every price, duration and description here is demo content for this showcase.</p>
+          </div>
+        </div>
+
+        <ol class="svc-list" id="svcList">
+          <li class="svc reveal" style="--d:0.00s" data-id="signature" data-name="Signature Haircut" data-duration="45" data-price="40">
+            <span class="svc__idx num" aria-hidden="true">01</span>
+            <h3 class="svc__name">Signature Haircut</h3>
+            <p class="svc__desc">Consultation, cut, wash and style. The one that started it all.</p>
+            <p class="svc__meta"><span class="num">45 min</span><span class="num svc__price">$40<small>demo</small></span></p>
+            <button class="svc__book" type="button" aria-pressed="false">Book<span class="sr-only"> Signature Haircut</span></button>
+          </li>
+          <li class="svc reveal" style="--d:0.07s" data-id="skin-fade" data-name="Skin Fade" data-duration="40" data-price="35">
+            <span class="svc__idx num" aria-hidden="true">02</span>
+            <h3 class="svc__name">Skin Fade</h3>
+            <p class="svc__desc">Down to the skin and blended without a line in sight. Foil-finished edges.</p>
+            <p class="svc__meta"><span class="num">40 min</span><span class="num svc__price">$35<small>demo</small></span></p>
+            <button class="svc__book" type="button" aria-pressed="false">Book<span class="sr-only"> Skin Fade</span></button>
+          </li>
+          <li class="svc reveal" style="--d:0.14s" data-id="taper-fade" data-name="Taper Fade" data-duration="35" data-price="32">
+            <span class="svc__idx num" aria-hidden="true">03</span>
+            <h3 class="svc__name">Taper Fade</h3>
+            <p class="svc__desc">A gentle step down at the neck and sides. Clean, classic, easy to keep.</p>
+            <p class="svc__meta"><span class="num">35 min</span><span class="num svc__price">$32<small>demo</small></span></p>
+            <button class="svc__book" type="button" aria-pressed="false">Book<span class="sr-only"> Taper Fade</span></button>
+          </li>
+          <li class="svc reveal" style="--d:0.21s" data-id="scissor" data-name="Scissor Cut" data-duration="50" data-price="45">
+            <span class="svc__idx num" aria-hidden="true">04</span>
+            <h3 class="svc__name">Scissor Cut</h3>
+            <p class="svc__desc">Cut entirely with shears for length, movement and texture.</p>
+            <p class="svc__meta"><span class="num">50 min</span><span class="num svc__price">$45<small>demo</small></span></p>
+            <button class="svc__book" type="button" aria-pressed="false">Book<span class="sr-only"> Scissor Cut</span></button>
+          </li>
+          <li class="svc reveal" style="--d:0.28s" data-id="beard" data-name="Beard Sculpt" data-duration="30" data-price="28">
+            <span class="svc__idx num" aria-hidden="true">05</span>
+            <h3 class="svc__name">Beard Sculpt</h3>
+            <p class="svc__desc">Shape, line and trim, finished with oil and a warm towel.</p>
+            <p class="svc__meta"><span class="num">30 min</span><span class="num svc__price">$28<small>demo</small></span></p>
+            <button class="svc__book" type="button" aria-pressed="false">Book<span class="sr-only"> Beard Sculpt</span></button>
+          </li>
+          <li class="svc reveal" style="--d:0.35s" data-id="shave" data-name="Hot Towel Shave" data-duration="35" data-price="38">
+            <span class="svc__idx num" aria-hidden="true">06</span>
+            <h3 class="svc__name">Hot Towel Shave</h3>
+            <p class="svc__desc">Straight razor, hot towels and a slow, careful finish.</p>
+            <p class="svc__meta"><span class="num">35 min</span><span class="num svc__price">$38<small>demo</small></span></p>
+            <button class="svc__book" type="button" aria-pressed="false">Book<span class="sr-only"> Hot Towel Shave</span></button>
+          </li>
+        </ol>
+
+        <div class="svc-summary reveal" id="svcSummary" aria-live="polite">
+          <p class="svc-summary__text" id="svcSummaryText">Choose a service to begin.</p>
+          <a class="btn btn--lg" id="svcContinue" href="#book" hidden>Continue to booking</a>
+        </div>
+        <p class="caption services__foot">All prices are demo prices in US dollars. Nothing here is a real offer.</p>
+      </div>
+    </section>
+
+    <!-- DEPOSIT: editorial explanation, reacts to the selected service -->
+    <section class="section theme-black deposit" id="deposit" aria-labelledby="depositTitle">
+      <div class="container--wide grid">
+        <h2 class="h2 deposit__title col-7 reveal" id="depositTitle">Your chair.<br><span>Your time.</span></h2>
+        <div class="deposit__body col-4 start-9 stack">
+          <p class="prose reveal">A <strong>$10 deposit</strong> holds your slot, so the chair is yours at the time you picked. It comes off your final price, and the rest is settled at the chair.</p>
+          <p class="services__tag reveal">Illustrative only</p>
+          <p class="caption reveal">This is a showcase. No payment is processed and no card details are collected.</p>
+        </div>
+        <dl class="deposit__sum col-7 reveal" id="depositSum" aria-live="polite">
+          <div><dt>Service <span class="muted">(demo price)</span></dt><dd id="depSvc">Choose a service above</dd></div>
+          <div><dt>Deposit <span class="muted">(demo)</span></dt><dd class="num" id="depDeposit">$10</dd></div>
+          <div class="deposit__total"><dt>Left to pay at the chair</dt><dd class="num" id="depDue">—</dd></div>
+        </dl>
+      </div>
+    </section>
+    <!-- BARBERS: staggered editorial profiles. Selection is saved to localStorage for the booking phase. -->
+    <section class="section theme-cream barbers" id="barbers" aria-labelledby="barbersTitle">
+      <div class="container--wide">
+        <div class="grid barbers__head">
+          <h2 class="h2 col-8 reveal" id="barbersTitle">Four chairs.<br>Four hands.</h2>
+          <div class="col-3 start-9 services__note reveal" style="--d:.15s">
+            <p class="services__tag">Fictional barbers</p>
+            <p class="caption">Demo profiles with illustrated portraits. Pick who cuts your hair, or leave it to us.</p>
+          </div>
+        </div>
+        <div class="barbers__grid">
+          <article class="barber barber--1 reveal" data-id="marcus" data-name="Marcus Hale" data-specialty="Skin fades and tapers">
+            <div class="barber__media img-reveal"><img src="assets/images/barbers/marcus-hale.svg" width="800" height="1000" alt="Portrait illustration of Marcus Hale, a barber with a short skin fade" loading="lazy" decoding="async"></div>
+            <span class="barber__idx num" aria-hidden="true">01</span>
+            <h3 class="barber__name">Marcus<br>Hale</h3>
+            <p class="barber__spec">Skin fades and tapers</p>
+            <p class="barber__bio">Twelve years behind the chair. Marcus treats every fade like a blueprint: measured, blended, finished with a sharp edge-up.</p>
+            <button class="barber__pick" type="button" aria-pressed="false"><span>Choose Marcus</span></button>
+          </article>
+          <article class="barber barber--2 reveal" data-id="elena" data-name="Elena Voss" data-specialty="Scissor cuts and texture">
+            <div class="barber__media img-reveal"><img src="assets/images/barbers/elena-voss.svg" width="800" height="1000" alt="Portrait illustration of Elena Voss, a barber with her hair in a bun" loading="lazy" decoding="async"></div>
+            <span class="barber__idx num" aria-hidden="true">02</span>
+            <h3 class="barber__name">Elena<br>Voss</h3>
+            <p class="barber__spec">Scissor cuts and texture</p>
+            <p class="barber__bio">Trained in London and cuts entirely by hand. Expect a proper consultation and a shape that grows out well.</p>
+            <button class="barber__pick" type="button" aria-pressed="false"><span>Choose Elena</span></button>
+          </article>
+          <article class="barber barber--3 reveal" data-id="dario" data-name="Dario Quinn" data-specialty="Classic cuts and hot towel shaves">
+            <div class="barber__media img-reveal"><img src="assets/images/barbers/dario-quinn.svg" width="800" height="1000" alt="Portrait illustration of Dario Quinn, a barber with a classic side part" loading="lazy" decoding="async"></div>
+            <span class="barber__idx num" aria-hidden="true">03</span>
+            <h3 class="barber__name">Dario<br>Quinn</h3>
+            <p class="barber__spec">Classic cuts and hot towel shaves</p>
+            <p class="barber__bio">A slow, old-school chair. His straight-razor work is why people book the last slot of the day.</p>
+            <button class="barber__pick" type="button" aria-pressed="false"><span>Choose Dario</span></button>
+          </article>
+          <article class="barber barber--4 reveal" data-id="jonah" data-name="Jonah Reyes" data-specialty="Beard sculpting">
+            <div class="barber__media img-reveal"><img src="assets/images/barbers/jonah-reyes.svg" width="800" height="1000" alt="Portrait illustration of Jonah Reyes, a barber with a full sculpted beard" loading="lazy" decoding="async"></div>
+            <span class="barber__idx num" aria-hidden="true">04</span>
+            <h3 class="barber__name">Jonah<br>Reyes</h3>
+            <p class="barber__spec">Beard sculpting</p>
+            <p class="barber__bio">Lines, shape and balance. Jonah designs a beard around the face it has to live on.</p>
+            <button class="barber__pick" type="button" aria-pressed="false"><span>Choose Jonah</span></button>
+          </article>
+        </div>
+        <div class="svc-summary reveal" id="barberSummary" aria-live="polite">
+          <p class="svc-summary__text" id="barberSummaryText">No barber chosen yet.</p>
+          <div class="cluster">
+            <button class="btn btn--ghost" type="button" id="barberAny" aria-pressed="false">No preference</button>
+            <a class="btn" id="barberContinue" href="#book" hidden>Continue to booking</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY: filterable portfolio with a dense, uneven grid -->
+    <section class="section theme-black gallery" id="gallery" aria-labelledby="galleryTitle">
+      <div class="container--wide">
+        <div class="grid gallery__head">
+          <h2 class="h2 col-8 reveal" id="galleryTitle">The proof<br><span>is in the edges.</span></h2>
+          <div class="col-3 start-9 services__note reveal" style="--d:.15s">
+            <p class="services__tag">Demo content</p>
+            <p class="caption">Illustrated placeholders. Swap in real photography by replacing the files in assets/images/gallery.</p>
+          </div>
+        </div>
+        <div class="cluster gallery__filters reveal" role="group" aria-label="Filter the portfolio"><button class="chip" type="button" data-filter="all" aria-pressed="true">All</button><button class="chip" type="button" data-filter="fade" aria-pressed="false">Skin fades</button><button class="chip" type="button" data-filter="taper" aria-pressed="false">Tapers</button><button class="chip" type="button" data-filter="textured" aria-pressed="false">Textured</button><button class="chip" type="button" data-filter="classic" aria-pressed="false">Classic</button><button class="chip" type="button" data-filter="beard" aria-pressed="false">Beard grooming</button></div>
+        <p class="sr-only" id="galleryStatus" aria-live="polite"></p>
+        <div class="gallery__grid" id="galleryGrid">
+          <figure class="g-item g--big" data-cat="fade">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/skin-fade-1.svg" width="1000" height="1000" alt="Back of a head with a skin fade, dark illustration" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">01</span><span class="g-title">Zero-to-one skin fade</span><span class="g-cat">Skin fade</span></figcaption>
+          </figure>
+          <figure class="g-item" data-cat="fade">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/skin-fade-2.svg" width="800" height="800" alt="Back of a head with a low skin fade on a cream background" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">02</span><span class="g-title">Low skin fade</span><span class="g-cat">Skin fade</span></figcaption>
+          </figure>
+          <figure class="g-item g--tall" data-cat="taper">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/taper-1.svg" width="600" height="1200" alt="Back of a head with a tapered neckline" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">03</span><span class="g-title">Neat tapered neckline</span><span class="g-cat">Taper</span></figcaption>
+          </figure>
+          <figure class="g-item g--wide" data-cat="taper">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/taper-2.svg" width="1200" height="600" alt="Back of a head with a classic taper on a cream background" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">04</span><span class="g-title">Classic taper, back</span><span class="g-cat">Taper</span></figcaption>
+          </figure>
+          <figure class="g-item" data-cat="textured">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/textured-1.svg" width="800" height="800" alt="Front view of a textured crop" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">05</span><span class="g-title">Crop with texture</span><span class="g-cat">Textured cut</span></figcaption>
+          </figure>
+          <figure class="g-item g--tall" data-cat="textured">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/textured-2.svg" width="600" height="1200" alt="Front view of a spiked textured cut on cream" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">06</span><span class="g-title">Spiked fringe</span><span class="g-cat">Textured cut</span></figcaption>
+          </figure>
+          <figure class="g-item g--wide" data-cat="classic">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/classic-1.svg" width="1200" height="600" alt="Front view of a combed side part" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">07</span><span class="g-title">Combed side part</span><span class="g-cat">Classic style</span></figcaption>
+          </figure>
+          <figure class="g-item" data-cat="classic">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/classic-2.svg" width="800" height="800" alt="Front view of a classic haircut on cream" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">08</span><span class="g-title">Gentleman's classic</span><span class="g-cat">Classic style</span></figcaption>
+          </figure>
+          <figure class="g-item g--big" data-cat="beard">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/beard-1.svg" width="1000" height="1000" alt="Front view of a sculpted full beard on cream" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">09</span><span class="g-title">Full beard, sculpted</span><span class="g-cat">Beard grooming</span></figcaption>
+          </figure>
+          <figure class="g-item" data-cat="beard">
+            <div class="g-media img-reveal"><img src="assets/images/gallery/beard-2.svg" width="800" height="800" alt="Front view of a short boxed beard" loading="lazy" decoding="async"></div>
+            <figcaption class="g-cap"><span class="g-no num">10</span><span class="g-title">Short boxed beard</span><span class="g-cat">Beard grooming</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS: all testimonials are fictional demo content. The rating is calculated in script.js from the six below. -->
+    <section class="section theme-cream reviews" id="reviews" aria-labelledby="reviewsTitle">
+      <div class="container--wide">
+        <div class="grid reviews__head">
+          <h2 class="h2 col-8 reveal" id="reviewsTitle">Heard<br>in the chair.</h2>
+          <div class="col-3 start-9 services__note reveal" style="--d:.15s">
+            <p class="services__tag">Fictional reviews</p>
+            <p class="caption">These testimonials are invented for this demo. They are not verified customer reviews.</p>
+          </div>
+        </div>
+        <div class="reviews__layout">
+          <aside class="rating reveal" aria-label="Demo rating summary">
+            <p class="rating__num num" id="ratingNum">4.8</p>
+            <span class="stars stars--lg" id="ratingStars" style="--r:4.8" role="img" aria-label="Average rating 4.8 out of 5 stars">★★★★★</span>
+            <p class="caption" id="ratingText">Demo rating from 6 fictional reviews</p>
+            <ul class="rating__bars" id="ratingBars" aria-label="Rating breakdown (demo)"></ul>
+          </aside>
+          <div class="quotes">
+          <figure class="quote quote--lead reveal" style="--d:0.00s" data-rating="5">
+            <span class="stars" style="--r:5" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            <blockquote><p>The cleanest skin fade I have had. Marcus took his time, checked every angle and the blend was perfect.</p></blockquote>
+            <figcaption>Alex M. <span class="muted">· Skin Fade · Demo testimonial</span></figcaption>
+          </figure>
+          <figure class="quote reveal" style="--d:0.08s" data-rating="5">
+            <span class="stars" style="--r:5" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            <blockquote><p>Elena asked more questions in five minutes than my last barber did in five years. The cut grows out beautifully.</p></blockquote>
+            <figcaption>Priya S. <span class="muted">· Scissor Cut · Demo testimonial</span></figcaption>
+          </figure>
+          <figure class="quote reveal" style="--d:0.16s" data-rating="5">
+            <span class="stars" style="--r:5" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            <blockquote><p>Hot towel shave with Dario. Slow, calm and sharp. I fell asleep for a minute and I regret nothing.</p></blockquote>
+            <figcaption>Tom R. <span class="muted">· Hot Towel Shave · Demo testimonial</span></figcaption>
+          </figure>
+          <figure class="quote reveal" style="--d:0.24s" data-rating="5">
+            <span class="stars" style="--r:5" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            <blockquote><p>Jonah reshaped my beard around my jaw instead of just trimming it. Strangers keep asking who did it.</p></blockquote>
+            <figcaption>Sam K. <span class="muted">· Beard Sculpt · Demo testimonial</span></figcaption>
+          </figure>
+          <figure class="quote reveal" style="--d:0.32s" data-rating="4">
+            <span class="stars" style="--r:4" role="img" aria-label="4 out of 5 stars">★★★★★</span>
+            <blockquote><p>Waited about ten minutes past my slot, but the taper was spot on and they offered coffee. Would book again.</p></blockquote>
+            <figcaption>Chris L. <span class="muted">· Taper Fade · Demo testimonial</span></figcaption>
+          </figure>
+          <figure class="quote reveal" style="--d:0.40s" data-rating="5">
+            <span class="stars" style="--r:5" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            <blockquote><p>Walked in with a vague idea, walked out with exactly what I meant. The chair alone is worth the visit.</p></blockquote>
+            <figcaption>Nadia B. <span class="muted">· Signature Haircut · Demo testimonial</span></figcaption>
+          </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ: accessible accordion (buttons + regions). Animated with a grid-rows transition. -->
+    <section class="section theme-black faq" id="faq" aria-labelledby="faqTitle">
+      <div class="container--wide grid">
+        <h2 class="h2 col-5 reveal" id="faqTitle">Good<br>questions.</h2>
+        <div class="faq__list col-7 reveal" id="faqList" style="--d:.1s">
+          <div class="faq__item">
+            <h3 class="faq__q"><button class="faq__btn" type="button" id="faq-q1" aria-expanded="false" aria-controls="faq-a1"><span>How does booking work?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a1" role="region" aria-labelledby="faq-q1"><div><p>Pick a service, a barber, a day and a time, then confirm. In this showcase the booking is a simulation that lives only in your browser. Nothing is sent anywhere.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q"><button class="faq__btn" type="button" id="faq-q2" aria-expanded="false" aria-controls="faq-a2"><span>What is the $10 deposit?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a2" role="region" aria-labelledby="faq-q2"><div><p>An illustrative deposit that shows how a live shop could hold your slot and take it off your final price. No payment is processed and no card details are collected.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q"><button class="faq__btn" type="button" id="faq-q3" aria-expanded="false" aria-controls="faq-a3"><span>Can I change or cancel a booking?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a3" role="region" aria-labelledby="faq-q3"><div><p>In the demo you can clear your saved booking at any time, since it is stored only in your browser. A real shop would set its own change and cancellation rules.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q"><button class="faq__btn" type="button" id="faq-q4" aria-expanded="false" aria-controls="faq-a4"><span>How long does a haircut take?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a4" role="region" aria-labelledby="faq-q4"><div><p>The demo services run from 30 to 50 minutes, depending on what you pick. The duration is shown next to each service.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q"><button class="faq__btn" type="button" id="faq-q5" aria-expanded="false" aria-controls="faq-a5"><span>Do you take walk-ins?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a5" role="region" aria-labelledby="faq-q5"><div><p>In this fictional shop, booked chairs come first, and walk-ins are welcome whenever a chair is free.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3 class="faq__q"><button class="faq__btn" type="button" id="faq-q6" aria-expanded="false" aria-controls="faq-a6"><span>Is HARD PART a real barber shop?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+            <div class="faq__panel" id="faq-a6" role="region" aria-labelledby="faq-q6"><div><p>No. HARD PART is a fictional showcase project. The address, hours, prices, barbers and reviews are all demo content.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION: fictional business details; the map is a stylised placeholder, not a real map -->
+    <section class="section theme-cream visit" id="visit" aria-labelledby="visitTitle">
+      <div class="container--wide">
+        <div class="grid visit__head">
+          <h2 class="h2 col-8 reveal" id="visitTitle">Come<br><span>on in.</span></h2>
+          <div class="col-3 start-9 services__note reveal" style="--d:.15s">
+            <p class="services__tag">Demo business</p>
+            <p class="caption">The address, hours and contact details below are fictional.</p>
+          </div>
+        </div>
+        <div class="visit__layout">
+          <div class="visit__info stack reveal">
+            <address class="visit__address">88 Foundry Lane<br>Sampleton, ST 00000</address>
+            <ul class="visit__contact">
+              <li><span class="muted">Phone</span> <a class="link" href="tel:+15550100142">(555) 010-0142</a></li>
+              <li><span class="muted">Email</span> <a class="link" href="mailto:hello@hardpart.example">hello@hardpart.example</a></li>
+            </ul>
+            <div>
+              <h3 class="h3">Opening hours <span class="muted">(demo)</span></h3>
+              <ul class="hours" id="hours"><li data-day="1"><span>Monday</span><span class="num">Closed</span></li><li data-day="2"><span>Tuesday</span><span class="num">9:00 to 19:00</span></li><li data-day="3"><span>Wednesday</span><span class="num">9:00 to 19:00</span></li><li data-day="4"><span>Thursday</span><span class="num">9:00 to 19:00</span></li><li data-day="5"><span>Friday</span><span class="num">9:00 to 19:00</span></li><li data-day="6"><span>Saturday</span><span class="num">9:00 to 17:00</span></li><li data-day="0"><span>Sunday</span><span class="num">10:00 to 16:00</span></li></ul>
+            </div>
+            <a class="btn btn--lg" href="https://www.google.com/maps/search/?api=1&amp;query=88+Foundry+Lane+Sampleton" target="_blank" rel="noopener">Get directions<span class="sr-only"> (opens in a new tab)</span></a>
+            <p class="caption">The address is fictional, so the maps link may not find a real place.</p>
+          </div>
+          <figure class="map reveal" style="--d:.12s">
+            <svg class="map__svg" viewBox="0 0 700 560" role="img" aria-label="Stylised map placeholder showing the demo shop location" preserveAspectRatio="xMidYMid slice">
+            <rect width="700" height="560" fill="#0d0c0b"/>
+            <path d="M-20 420 C 120 360 220 470 360 400 S 600 330 740 380" fill="none" stroke="#2a2825" stroke-width="46"/>
+            <g stroke="#f1ebdd" stroke-opacity=".5" stroke-width="2" fill="none">
+              <path d="M0 150H700M0 290H700M0 520H700"/><path d="M140 0V560M330 0V560M520 0V560"/><path d="M0 60L700 250" stroke-opacity=".3"/>
+            </g>
+            <g fill="#f1ebdd" fill-opacity=".07"><rect x="160" y="170" width="150" height="100"/><rect x="350" y="170" width="150" height="100"/><rect x="540" y="170" width="140" height="100"/><rect x="160" y="310" width="150" height="80"/><rect x="40" y="310" width="80" height="80"/></g>
+            <g class="map__pin" transform="translate(330 150)">
+              <circle class="map__pulse" r="22" fill="#f1ebdd" fill-opacity=".25"/>
+              <circle r="11" fill="#f1ebdd"/><circle r="4" fill="#000"/>
+            </g>
+            <text x="352" y="124" fill="#f1ebdd" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="20" letter-spacing="1">HARD PART</text>
+          </svg>
+            <figcaption class="map__cap">Map placeholder</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING: frontend-only demonstration (see booking.js). No backend, no payments, no real appointments. -->
+    <section class="section theme-black bookingsec" id="book" aria-labelledby="bookTitle">
+      <div class="container--wide">
+        <div class="grid bookingsec__head">
+          <h2 class="h2 col-8 reveal" id="bookTitle">Book<br><span>your chair.</span></h2>
+          <div class="col-3 start-9 services__note reveal" style="--d:.15s">
+            <p class="services__tag">Demonstration only</p>
+            <p class="caption">A working booking flow, built for this showcase. It never books a real appointment.</p>
+          </div>
+        </div>
+
+        <div class="booking" id="booking">
+          <p class="booking__demo" role="note"><strong>Demo booking.</strong> No real appointment is made, no payment is taken, and nothing is sent anywhere. Your choices are saved in this browser only.</p>
+          <ol class="stepper" id="stepper" aria-label="Booking steps"></ol>
+          <div class="booking__grid">
+            <div class="booking__main">
+              <div class="bpanel" id="bookPanel"></div>
+              <div class="booking__nav" id="bookNav">
+                <button class="btn btn--ghost btn--lg" type="button" id="bookBack" hidden>Back</button>
+                <button class="btn btn--lg" type="button" id="bookNext">Continue</button>
+                <p class="booking__hint" id="bookHint" aria-live="polite"></p>
+              </div>
+            </div>
+            <aside class="summary" id="bookSummary" aria-label="Booking summary (demo)"></aside>
+          </div>
+          <noscript><p class="caption">The booking demo needs JavaScript to run.</p></noscript>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- FOOTER: all business details are fictional demo content -->
+  <footer class="footer" aria-labelledby="footerTitle">
+    <div class="container--wide">
+      <h2 class="sr-only" id="footerTitle">HARD PART footer</h2>
+      <div class="footer__cols">
+        <div>
+          <h3 class="footer__h">Visit <span class="muted">(demo)</span></h3>
+          <address class="footer__addr">88 Foundry Lane<br>Sampleton, ST 00000</address>
+          <p><a class="link" href="tel:+15550100142">(555) 010-0142</a><br><a class="link" href="mailto:hello@hardpart.example">hello@hardpart.example</a></p>
+        </div>
+        <div>
+          <h3 class="footer__h">Hours <span class="muted">(demo)</span></h3>
+          <ul class="footer__list">
+            <li><span>Mon</span><span>Closed</span></li>
+            <li><span>Tue to Fri</span><span class="num">9:00 to 19:00</span></li>
+            <li><span>Sat</span><span class="num">9:00 to 17:00</span></li>
+            <li><span>Sun</span><span class="num">10:00 to 16:00</span></li>
+          </ul>
+        </div>
+        <nav aria-label="Footer">
+          <h3 class="footer__h">Explore</h3>
+          <ul class="footer__links">
+            <li><a class="link" href="#services">Services</a></li>
+            <li><a class="link" href="#barbers">Barbers</a></li>
+            <li><a class="link" href="#gallery">Work</a></li>
+            <li><a class="link" href="#reviews">Reviews</a></li>
+            <li><a class="link" href="#faq">FAQ</a></li>
+            <li><a class="link" href="#book">Book a chair</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h3 class="footer__h">About this site</h3>
+          <p class="footer__note">HARD PART is a fictional showcase project. The business, barbers, prices, reviews and bookings are demo content, and no real appointment can be made here.</p>
+        </div>
+      </div>
+      <p class="footer__mark" aria-hidden="true"><span>Hard</span><span>Part</span></p>
+      <div class="footer__base">
+        <p>&copy; 2026 HARD PART. A fictional demonstration.</p>
+        <a class="link" href="#top">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
   <script src="script.js"></script>
+  <script src="booking.js"></script>
 </body>
 </html>
