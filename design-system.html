@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HARD PART — Design system</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Internal reference page for the design system. Not part of the public site. -->
+  <section class="section theme-black">
+    <div class="container--wide stack" style="--stack:var(--space-6)">
+      <p class="caption">Design system, internal reference</p>
+      <h1 class="h1">Hard<br>Part</h1>
+      <p class="lede">Black, cream and one steady grey. Wide heavy headlines, a quiet serif for everything said softly.</p>
+    </div>
+  </section>
+
+  <section class="section theme-cream">
+    <div class="container grid">
+      <h2 class="h2 col-6">Colour</h2>
+      <div class="col-6 start-8 cluster">
+        <div class="card" style="background:#000;color:#f1ebdd;min-width:8rem">Black<br><span class="num">#000</span></div>
+        <div class="card" style="background:#f1ebdd;border-color:#000;min-width:8rem">Cream<br><span class="num">#f1ebdd</span></div>
+        <div class="card" style="background:#8a8780;color:#000;min-width:8rem">Grey<br><span class="num">#8a8780</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section theme-black">
+    <div class="container stack" style="--stack:var(--space-6)">
+      <p class="display" style="font-size:var(--fs-h1)">Display</p>
+      <h2 class="h2">Heading two</h2>
+      <h3 class="h3">Heading three</h3>
+      <p class="prose">Body copy is set in Newsreader with generous leading and a measure under 60 characters. <a class="link" href="#">Text links</a> draw their underline away on hover.</p>
+      <p class="caption">Caption and supporting detail</p>
+      <hr class="rule">
+      <div class="cluster">
+        <a class="btn btn--lg" href="#">Primary</a>
+        <a class="btn btn--ghost btn--lg" href="#">Ghost</a>
+        <span class="chip">Fade</span><span class="chip is-active">Skin fade</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section theme-cream">
+    <div class="container grid">
+      <article class="card card--interactive col-5"><h3 class="h3">Card</h3><p class="caption">Border, subtle shadow, 2px radius.</p></article>
+      <article class="card card--interactive card--offset col-4 start-8"><h3 class="h3">Offset</h3><p class="caption">Asymmetry through spans and offsets.</p></article>
+      <div class="frame frame--wide col-7" role="img" aria-label="Image frame placeholder"></div>
+      <form class="stack col-4 start-9" onsubmit="return false">
+        <div class="field"><label for="n">Name</label><input class="input" id="n" placeholder="Your name"></div>
+        <button class="btn" type="button">Save</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

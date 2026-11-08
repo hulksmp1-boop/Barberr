@@ -1,0 +1,413 @@
+/* ==========================================================
+   HARD PART — style.css
+   1. Tokens  2. Base  3. Buttons  4. Nav  5. Menu  6. Hero  7. Stubs
+   ========================================================== */
+
+/* 1. TOKENS
+   Breakpoints (media queries can't read variables, so they're documented here):
+   sm 560px · md 820px · lg 1100px · xl 1440px */
+:root {
+  /* Colour — raw palette */
+  --black: #000;
+  --ink: #0d0c0b;           /* raised surface on black */
+  --cream: #f1ebdd;
+  --cream-deep: #e4dcc9;    /* raised surface on cream */
+  --grey: #8a8780;
+  --grey-dark: #1c1b19;
+  --grey-mid: #3a3835;
+
+  /* Colour — semantic (re-pointed by .theme-cream) */
+  --bg: var(--black);
+  --fg: var(--cream);
+  --surface: var(--ink);
+  --muted: var(--grey);
+  --line: var(--grey-dark);
+
+  /* Typography */
+  --font-display: "Archivo", "Arial Narrow", sans-serif;
+  --font-text: "Newsreader", Georgia, serif;
+  --fs-xs: .8125rem;
+  --fs-sm: .9375rem;
+  --fs-base: 1.125rem;
+  --fs-lg: clamp(1.25rem, 1.1rem + .6vw, 1.6rem);
+  --fs-h3: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --fs-h2: clamp(2.4rem, 1.4rem + 4.5vw, 5.5rem);
+  --fs-h1: clamp(3.4rem, 1rem + 11vw, 10rem);
+  --fs-mega: clamp(5.2rem, 25.5vw, 25rem);
+
+  /* Spacing (4px base, fluid at the top end) */
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2.25rem;
+  --space-7: clamp(3rem, 6vw, 4.5rem);
+  --space-8: clamp(4.5rem, 10vw, 8rem);
+  --space-9: clamp(6rem, 16vw, 13rem);
+  --pad: clamp(1.25rem, 4vw, 3.5rem);   /* page gutter */
+  --gap: clamp(1rem, 2.5vw, 2rem);      /* grid gap */
+
+  /* Radius — deliberately restrained: sharp by default, soft only on small controls */
+  --radius-0: 0;
+  --radius-1: 2px;
+  --radius-2: 6px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --shadow-1: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 30px -18px rgba(0,0,0,.9);
+  --shadow-2: 0 30px 60px -30px rgba(0,0,0,.85);
+  --shadow-cream: 0 24px 50px -28px rgba(28,27,25,.45);
+
+  /* Motion */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --t-fast: .2s;
+  --t-base: .45s;
+  --t-slow: .9s;
+
+  /* Layout widths */
+  --w-text: 42rem;
+  --w-content: 76rem;
+  --w-wide: 96rem;
+  --nav-h: 4.5rem;
+}
+
+/* 2. BASE */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-text);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+h1, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+body.menu-open { overflow: hidden; }
+
+.skip {
+  position: fixed; left: var(--pad); top: -4rem; z-index: 100;
+  background: var(--cream); color: var(--black);
+  padding: .6rem 1rem; font-family: var(--font-display); font-weight: 700;
+}
+.skip:focus { top: 1rem; }
+
+/* 3. BUTTONS — cream fill by default; hover wipes the opposite colour up from the bottom */
+.btn {
+  --wipe: var(--black);
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 3rem; padding: 0 1.6rem;
+  font-family: var(--font-display); font-stretch: 110%; font-weight: 700;
+  font-size: .95rem; letter-spacing: .02em;
+  color: var(--black); background: var(--cream);
+  border: 2px solid var(--cream);
+  transition: transform var(--t-base) var(--ease), color var(--t-base) var(--ease);
+}
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--wipe);
+  transform: scaleY(0); transform-origin: bottom; transition: transform var(--t-base) var(--ease);
+}
+.btn:hover { transform: translateY(-3px); color: var(--cream); }
+.btn:hover::before { transform: scaleY(1); }
+.btn--ghost { --wipe: var(--cream); background: transparent; color: var(--cream); }
+.btn--ghost:hover { color: var(--black); }
+.btn--sm { min-height: 2.5rem; padding: 0 1.1rem; font-size: .85rem; }
+
+/* 4. NAV — difference blend makes it readable on black AND cream */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  height: var(--nav-h); padding: 0 var(--pad);
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  color: var(--cream);
+  mix-blend-mode: difference;
+}
+.nav__logo {
+  font-family: var(--font-display); font-stretch: 125%; font-weight: 900;
+  font-size: 1.15rem; letter-spacing: .01em;
+}
+.nav__links { display: flex; gap: 2.2rem; margin-left: auto; font-family: var(--font-display); font-weight: 500; font-size: .95rem; }
+.nav__links a { position: relative; padding: .3rem 0; }
+.nav__links a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%;
+  background: currentColor; transform: scaleX(0); transform-origin: right;
+  transition: transform .45s var(--ease);
+}
+.nav__links a:hover::after { transform: scaleX(1); transform-origin: left; }
+/* The nav button must stay solid cream-on-black in difference mode */
+.nav .btn { background: var(--cream); color: var(--black); }
+
+.nav__toggle { display: none; width: 2.75rem; height: 2.75rem; background: none; border: 0; padding: 0; cursor: pointer; position: relative; }
+.nav__toggle span {
+  position: absolute; left: .6rem; right: .6rem; height: 2px; background: var(--cream);
+  transition: transform .4s var(--ease);
+}
+.nav__toggle span:first-child { top: calc(50% - 5px); }
+.nav__toggle span:last-child { top: calc(50% + 3px); }
+.menu-open .nav__toggle span:first-child { transform: translateY(4px) rotate(45deg); }
+.menu-open .nav__toggle span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+/* 5. MOBILE MENU */
+.menu {
+  position: fixed; inset: 0; z-index: 40; background: var(--black);
+  display: flex; align-items: flex-end; padding: calc(var(--nav-h) + 1rem) var(--pad) 3rem;
+  clip-path: inset(0 0 100% 0); transition: clip-path .6s var(--ease);
+}
+.menu[hidden] { display: none; }
+.menu.is-open { clip-path: inset(0); }
+.menu nav { display: flex; flex-direction: column; width: 100%; }
+.menu a {
+  font-family: var(--font-display); font-stretch: 120%; font-weight: 800;
+  font-size: clamp(2rem, 9vw, 3.2rem); line-height: 1.15; padding: .25rem 0;
+  border-bottom: 1px solid var(--grey-dark);
+}
+
+/* 6. HERO
+   Layers: black page → cream panel (slanted left edge = the "part") → photo → headline.
+   The headline/CTAs use mix-blend-mode: difference with cream text, so letters are
+   cream on black and pure black on the cream panel, flipping where the edge crosses.
+   Parallax is driven by two CSS variables written by script.js:
+   --sy (scroll offset in px) and --mx (pointer position, -1…1). */
+.hero {
+  --sy: 0; --mx: 0;
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: 100vh; min-height: 100svh;
+  background: var(--black);
+}
+.hero__panel {
+  position: absolute; z-index: 0; top: -2rem; bottom: -2rem; right: 0; width: 54%;
+  background: var(--cream);
+  clip-path: polygon(24% 0, 100% 0, 100% 100%, 0 100%);
+  transform: translate3d(calc(var(--mx) * -10px), calc(var(--sy) * .05px), 0);
+}
+/* Decorative: rotated caption and a barber's ruler along the foot of the panel */
+.hero__side {
+  position: absolute; right: 1.1rem; top: 50%; translate: 0 -50%;
+  writing-mode: vertical-rl; font-style: italic; font-size: var(--fs-sm); color: var(--black); opacity: .65;
+}
+.hero__ruler {
+  position: absolute; left: 30%; right: 3.5rem; bottom: 2.5rem; height: 14px; opacity: .55;
+  background:
+    repeating-linear-gradient(90deg, var(--black) 0 1px, transparent 1px 40px) 0 100% / 100% 100% no-repeat,
+    repeating-linear-gradient(90deg, var(--black) 0 1px, transparent 1px 8px) 0 100% / 100% 45% no-repeat;
+}
+.hero__photo {
+  position: absolute; z-index: 1; margin: 0;
+  right: calc(var(--pad) + 2.2rem); top: calc(var(--nav-h) + 1.5rem);
+  width: min(27vw, 25rem, 32svh);
+  aspect-ratio: 4 / 5; overflow: hidden; background: var(--grey-mid);
+  box-shadow: var(--shadow-2);
+  transform: translate3d(calc(var(--mx) * 14px), calc(var(--sy) * -.07px), 0);
+}
+.hero__photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transform: translate3d(0, calc(var(--sy) * .1px), 0) scale(1.2); /* inner drift = parallax inside the frame */
+}
+.hero__cap {
+  position: absolute; left: 0; bottom: 0; padding: .5rem .8rem;
+  background: var(--black); color: var(--cream); font-size: var(--fs-xs); font-style: italic;
+}
+.hero__content {
+  position: relative; z-index: 2; min-height: inherit;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: calc(var(--nav-h) + 2rem) var(--pad) 2.25rem;
+  color: var(--cream); mix-blend-mode: difference; pointer-events: none;
+}
+.hero__content a { pointer-events: auto; }
+.hero__title {
+  margin: 0; font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-stretch: 125%; font-size: 9.6vw; line-height: .84; letter-spacing: -.04em;
+  transform: translate3d(0, calc(var(--sy) * -.08px), 0);
+}
+.hero__title .line { display: block; overflow: hidden; padding-block: .03em; }
+.hero__title .line > span { display: block; }
+.hero__title .line--2 { margin-left: 8vw; }      /* asymmetry: second line steps in */
+.hero__foot {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
+  margin-top: clamp(1.5rem, 3.5vw, 2.75rem); width: min(100%, 46rem);
+}
+.hero__lede { max-width: 24ch; font-size: var(--fs-lg); font-style: italic; line-height: 1.35; }
+.hero__actions { display: flex; flex-direction: column; gap: .6rem; }
+.hero__actions .btn { min-height: 3.25rem; padding: 0 1.6rem; font-size: .95rem; }
+
+/* Entrance sequence: panel slides in → photo is revealed → headline lines rise → foot fades */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero__panel { animation: panel-in 1.3s var(--ease) both; }
+  .js .hero__photo { animation: photo-in 1.5s .5s var(--ease) both; }
+  .js .hero__photo img { animation: photo-settle 2.2s .5s var(--ease) both; }
+  .js .hero__title .line > span { animation: rise 1.1s .7s var(--ease) both; }
+  .js .hero__title .line--2 > span { animation-delay: .85s; }
+  .js .hero__foot { animation: fade 1s 1.3s ease both; }
+}
+@keyframes panel-in { from { transform: translate3d(100%, 0, 0); } }
+@keyframes photo-in { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+@keyframes photo-settle { from { scale: 1.25; } }
+@keyframes rise { from { transform: translateY(105%); } }
+@keyframes fade { from { opacity: 0; } }
+
+@media (max-width: 820px) {
+  .hero__panel { top: 0; bottom: auto; height: 56svh; width: 100%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 14vw)); }
+  .hero__side, .hero__ruler { display: none; }
+  .hero__photo { right: var(--pad); top: calc(var(--nav-h) + .75rem); width: min(56vw, 20rem, 34svh); }
+  .hero__title { font-size: 14vw; font-stretch: 105%; }
+  .hero__title .line--2 { margin-left: 0; }
+  .hero__foot { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  .hero__actions { flex-direction: row; flex-wrap: wrap; }
+}
+
+/* 7. STUBS (temporary) */
+.stub { padding: 6rem var(--pad); border-top: 1px solid var(--grey-dark); color: var(--grey); font-style: italic; }
+
+/* RESPONSIVE (nav) */
+@media (max-width: 820px) {
+  .nav__links, .nav .btn { display: none; }
+  .nav__toggle { display: block; margin-left: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: .01ms !important; }
+}
+
+/* ==========================================================
+   8. DESIGN SYSTEM — reusable classes
+   Themes · Layout · Type · Rules · Cards · Frames · Chips · Forms · Utilities
+   ========================================================== */
+
+/* Themes: flip the semantic tokens on any section */
+.theme-cream { --bg: var(--cream); --fg: var(--black); --surface: var(--cream-deep); --muted: #6b675f; --line: #cfc6b1; }
+.theme-black { --bg: var(--black); --fg: var(--cream); --surface: var(--ink); --muted: var(--grey); --line: var(--grey-dark); }
+.theme-cream, .theme-black { background: var(--bg); color: var(--fg); }
+.theme-cream :focus-visible { outline-color: var(--black); }
+
+/* Layout */
+.section { padding-block: var(--space-8); }
+.section--tight { padding-block: var(--space-7); }
+.container { width: min(100% - 2 * var(--pad), var(--w-content)); margin-inline: auto; }
+.container--wide { width: min(100% - 2 * var(--pad), var(--w-wide)); margin-inline: auto; }
+.container--text { width: min(100% - 2 * var(--pad), var(--w-text)); margin-inline: auto; }
+
+/* 12-column grid. Asymmetry comes from uneven spans + offsets. */
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); }
+.grid > * { grid-column: 1 / -1; }
+.stack > * + * { margin-top: var(--stack, var(--space-5)); }
+.cluster { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+
+/* Type */
+.display, .h1, .h2, .h3 { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; }
+.display { font-size: var(--fs-mega); font-stretch: 125%; font-weight: 900; line-height: .78; letter-spacing: -.045em; }
+.h1 { font-size: var(--fs-h1); font-stretch: 120%; line-height: .85; letter-spacing: -.04em; }
+.h2 { font-size: var(--fs-h2); font-stretch: 112%; line-height: .9; letter-spacing: -.03em; }
+.h3 { font-size: var(--fs-h3); font-stretch: 100%; font-weight: 700; line-height: 1; letter-spacing: -.01em; }
+.lede { font-size: var(--fs-lg); font-style: italic; line-height: 1.4; max-width: 30ch; }
+.prose { max-width: 58ch; line-height: 1.7; }
+.prose p + p { margin-top: 1em; }
+.caption { font-size: var(--fs-sm); color: var(--muted); font-style: italic; }
+.num { font-family: var(--font-display); font-stretch: 100%; font-variant-numeric: tabular-nums; font-weight: 600; }
+.muted { color: var(--muted); }
+.balance { text-wrap: balance; }
+
+/* Rules and borders */
+.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+.rule--strong { border-top: 2px solid var(--fg); }
+.list-rules > * { border-top: 1px solid var(--line); padding-block: var(--space-4); }
+.list-rules > *:last-child { border-bottom: 1px solid var(--line); }
+
+/* Text link */
+.link { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size var(--t-base) var(--ease); }
+.link:hover { background-size: 0 1px; background-position: 100% 100%; }
+
+/* Buttons on themed sections (the base .btn is cream; this adapts it) */
+.theme-cream .btn:not(.btn--ghost) { background: var(--black); color: var(--cream); border-color: var(--black); }
+.theme-cream .btn--ghost { color: var(--black); border-color: var(--black); }
+.btn--lg { min-height: 3.5rem; padding: 0 2.2rem; font-size: 1.05rem; }
+
+/* Cards */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-1); padding: var(--space-6); box-shadow: var(--shadow-1); transition: transform var(--t-base) var(--ease), border-color var(--t-base) var(--ease); }
+.theme-cream .card { box-shadow: var(--shadow-cream); }
+.card--interactive:hover { transform: translateY(-4px); border-color: var(--muted); }
+.card--flat { box-shadow: none; background: transparent; }
+.card--offset { margin-top: var(--space-7); }
+
+/* Image frames (use with <img> or as a graphic placeholder) */
+.frame { position: relative; overflow: hidden; background: var(--grey-mid); aspect-ratio: var(--ratio, 4 / 5); border-radius: var(--radius-1); }
+.frame > img, .frame > video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.frame--wide { --ratio: 16 / 10; }
+.frame--tall { --ratio: 3 / 5; }
+.frame--square { --ratio: 1; }
+.frame--grayscale > img { filter: grayscale(1) contrast(1.08); transition: filter var(--t-slow) var(--ease), transform var(--t-slow) var(--ease); }
+.frame--grayscale:hover > img { filter: none; transform: scale(1.03); }
+
+/* Chips and tags */
+.chip { display: inline-flex; align-items: center; min-height: 2rem; padding: 0 .9rem; border: 1px solid var(--line); border-radius: var(--radius-pill); font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 600; }
+.chip[aria-pressed="true"], .chip.is-active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+/* Forms (used by booking) */
+.field { display: grid; gap: var(--space-2); }
+.field label { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-sm); }
+.input { width: 100%; min-height: 3.25rem; padding: 0 var(--space-4); background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: var(--radius-1); font: inherit; transition: border-color var(--t-fast); }
+.input:hover { border-color: var(--muted); }
+.input:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; border-color: var(--fg); }
+.input::placeholder { color: var(--muted); }
+
+/* Utilities */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.text-right { text-align: right; }
+.hide-sm { display: initial; }
+.reveal { opacity: 0; transform: translateY(1.5rem); transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease); }
+.reveal.is-visible, .no-js .reveal { opacity: 1; transform: none; }
+
+/* Responsive grid spans */
+@media (min-width: 820px) {
+  .grid > .col-3 { grid-column: span 3; }
+  .grid > .col-4 { grid-column: span 4; }
+  .grid > .col-5 { grid-column: span 5; }
+  .grid > .col-6 { grid-column: span 6; }
+  .grid > .col-7 { grid-column: span 7; }
+  .grid > .col-8 { grid-column: span 8; }
+  .grid > .start-2 { grid-column-start: 2; }
+  .grid > .start-6 { grid-column-start: 6; }
+  .grid > .start-8 { grid-column-start: 8; }
+  .grid > .start-9 { grid-column-start: 9; }
+}
+@media (max-width: 560px) {
+  .hide-sm { display: none; }
+  .card { padding: var(--space-5); }
+  .card--offset { margin-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+/* ==========================================================
+   9. EXPERIENCE — 3D chair stage
+   ========================================================== */
+.chair { overflow: hidden; }
+.chair .grid { align-items: end; }
+.chair__stage {
+  position: relative; overflow: hidden; aspect-ratio: 5 / 4; min-height: 24rem;
+  background: radial-gradient(ellipse at 62% 30%, #2a2825, #000 72%);
+  border: 1px solid var(--line); border-radius: var(--radius-1);
+}
+.chair__fallback, .chair__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.chair__fallback { object-fit: cover; transition: opacity var(--t-slow) var(--ease), visibility var(--t-slow); }
+.chair__canvas { opacity: 0; transition: opacity var(--t-slow) var(--ease); }
+.chair__stage.is-3d .chair__canvas { opacity: 1; }
+.chair__stage.is-3d .chair__fallback { opacity: 0; visibility: hidden; }
+.chair__badge {
+  position: absolute; left: 1rem; top: 1rem; margin: 0; padding: .3rem .7rem;
+  border: 1px solid var(--cream); border-radius: var(--radius-pill);
+  font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 600; background: rgba(0,0,0,.55);
+}
+.chair__loading { position: absolute; right: 1rem; bottom: 1rem; margin: 0; font-style: italic; font-size: var(--fs-sm); opacity: 0; transition: opacity var(--t-base); }
+.chair__stage.is-loading .chair__loading { opacity: .8; }
+.chair__load { position: absolute; left: 50%; bottom: 1.5rem; translate: -50% 0; }
+.chair__load[hidden] { display: none; }
+.chair__views .chip { background: transparent; color: var(--fg); cursor: pointer; font-family: var(--font-display); transition: background var(--t-fast), color var(--t-fast), opacity var(--t-fast); }
+.chair__views .chip:hover:not(:disabled) { border-color: var(--fg); }
+.chair__views .chip:disabled { opacity: .35; cursor: not-allowed; }
+@media (max-width: 820px) {
+  .chair__stage { aspect-ratio: 4 / 5; min-height: 0; }
+  .chair__fallback { object-fit: contain; }
+}

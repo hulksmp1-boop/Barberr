@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HARD PART — Barber Shop</title>
+  <meta name="description" content="HARD PART is a modern barber shop for precision cuts, fades and hot-towel shaves. Demo project.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Cpath d='M18 0h14v32H12z' fill='%23f1ebdd'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- HEADER -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#top" aria-label="HARD PART, back to top">HARD PART</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#barbers">Barbers</a>
+      <a href="#experience">Experience</a>
+    </nav>
+    <a class="btn btn--sm" href="#book">Book Now</a>
+    <button class="nav__toggle" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="menu" id="menu" hidden>
+    <nav aria-label="Mobile">
+      <a href="#services">Services</a>
+      <a href="#barbers">Barbers</a>
+      <a href="#experience">Experience</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+      <a href="#book">Book Now</a>
+    </nav>
+  </div>
+
+  <main id="main">
+    <!-- HERO: a cream slab with a slanted "part" edge holds the photo; the headline crosses the edge and inverts -->
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="hero__panel" aria-hidden="true">
+        <span class="hero__side">Straight razor. Hot towel. Sharp lines.</span>
+        <span class="hero__ruler"></span>
+      </div>
+
+      <figure class="hero__photo">
+        <!-- Swap this src for a real photograph (4:5 portrait works best) -->
+        <img src="assets/images/hero-barber.svg" width="800" height="1000" alt="A straight razor resting above a comb on a dark surface" fetchpriority="high">
+        <figcaption class="hero__cap">Finished with a straight razor</figcaption>
+      </figure>
+
+      <div class="hero__content">
+        <h1 class="hero__title" id="heroTitle">
+          <span class="line"><span>Your cut.</span></span>
+          <span class="line line--2"><span>Your rules.</span></span>
+        </h1>
+        <div class="hero__foot">
+          <p class="hero__lede">Precision grooming. Personal style. An experience worth coming back for.</p>
+          <div class="hero__actions">
+            <a class="btn btn--lg" href="#book">Book an Appointment</a>
+            <a class="btn btn--ghost btn--lg" href="#services">Explore Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Placeholders: replaced in later phases -->
+    <!-- EXPERIENCE: lazy-loaded interactive 3D chair (static preview on small / low-power devices) -->
+    <section class="section theme-black chair" id="experience" aria-labelledby="chairTitle">
+      <div class="container--wide grid">
+        <div class="chair__copy col-4 stack">
+          <h2 class="h2 balance" id="chairTitle">Take the chair.</h2>
+          <p class="prose">Walk around it before you sit in it. Move your pointer to shift the light, or pick a view.</p>
+          <div class="cluster chair__views" role="group" aria-label="Camera views">
+            <button class="chip" type="button" data-view="full" aria-pressed="true" disabled data-caption="The full chair. Leather, steel and a footrest that gets used.">Full chair</button>
+            <button class="chip" type="button" data-view="headrest" aria-pressed="false" disabled data-caption="An adjustable headrest, built for a long, calm shave.">Headrest</button>
+            <button class="chip" type="button" data-view="leather" aria-pressed="false" disabled data-caption="Padded leather and wide arms. Easy to settle into.">Leather</button>
+            <button class="chip" type="button" data-view="footrest" aria-pressed="false" disabled data-caption="A tilted footrest. Sit back and let us work.">Footrest</button>
+          </div>
+          <p class="caption" id="chairCaption" aria-live="polite">The full chair. Leather, steel and a footrest that gets used.</p>
+        </div>
+
+        <div class="chair__stage col-8" id="chairStage">
+          <img class="chair__fallback" src="assets/images/chair-fallback.svg" width="800" height="640" alt="Illustration of a barber chair in side view" loading="lazy">
+          <canvas class="chair__canvas" role="img" aria-label="Interactive 3D barber chair. Use the view buttons to change the camera angle."></canvas>
+          <p class="chair__badge" id="chairBadge">Static preview</p>
+          <p class="chair__loading" aria-hidden="true">Loading 3D chair</p>
+          <button class="btn chair__load" id="chairLoad" type="button" hidden>Load 3D view</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stub" id="services"><p>Services and pricing — next phase</p></section>
+    <section class="stub" id="barbers"><p>Barbers — next phase</p></section>
+    <section class="stub" id="gallery"><p>Work — next phase</p></section>
+    <section class="stub" id="reviews"><p>Reviews — next phase</p></section>
+    <section class="stub" id="faq"><p>FAQ — next phase</p></section>
+    <section class="stub" id="visit"><p>Hours and location — next phase</p></section>
+    <section class="stub" id="book"><p>Booking — next phase</p></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
